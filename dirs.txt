@@ -1,0 +1,5 @@
+.config/gtk-3 => gtk themes config
+.config/gtk-4 => gtk themes config
+.config/fontconfig/ => fonts config
+.local/share/fonts/ => fonts store
+.local/share/aurorae/themes/ => themes store
