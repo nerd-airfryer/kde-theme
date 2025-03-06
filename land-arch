@@ -10,3 +10,6 @@ curl -fsS https://dl.brave.com/install.sh | bash
 
 # install vscode
 yay -S visual-studio-code-bin
+
+# Remove all unnecessary Pacakges
+sudo pacman -Rns $(pacman -Qdtq)
