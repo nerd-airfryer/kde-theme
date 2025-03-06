@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# install yay
+git clone https://aur.archlinux.org/yay.git
+cd yay/
+makepkg -si
+
+# install brave
+curl -fsS https://dl.brave.com/install.sh | bash
+
+# install vscode
+yay -S visual-studio-code-bin

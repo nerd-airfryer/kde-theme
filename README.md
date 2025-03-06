@@ -191,37 +191,41 @@ nano 70-default-emoji-font.conf
 - Paste this content
 
 ```xml
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+
 <fontconfig>
-    <alias binding="same">
-        <family>emoji</family>
-        <prefer>
-            <family>[EMOJI_FONT_NAME]</family>
-        </prefer>
-    </alias>
-
-    <!-- Bind the emoji font to all other font types -->
-    <alias>
-        <family>serif</family>
-        <prefer>
-            <family>[EMOJI_FONT_NAME]</family>
-        </prefer>
-    </alias>
-
-    <alias>
-        <family>sans-serif</family>
-        <prefer>
-            <family>[EMOJI_FONT_NAME]</family>
-        </prefer>
-    </alias>
-
-    <alias>
-        <family>monospace</family>
-        <prefer>
-            <family>[EMOJI_FONT_NAME]</family>
-        </prefer>
-    </alias>
+    <match>
+        <test name="family">
+        <string>sans-serif</string></test>
+        <edit name="family" mode="prepend" binding="strong">
+            <string>[EMOJI_FONT_NAME]</string>
+        </edit>
+    </match>
+    <match>
+        <test name="family">
+            <string>serif</string>
+        </test>
+        <edit name="family" mode="prepend" binding="strong">
+            <string>[EMOJI_FONT_NAME]</string>
+        </edit>
+    </match>
+    <match>
+        <test name="family">
+            <string>monospace</string>
+        </test>
+        <edit name="family" mode="prepend" binding="strong">
+            <string>[EMOJI_FONT_NAME]</string>
+        </edit>
+    </match>
+    <match>
+        <test name="family">
+            <string>emoji</string>
+        </test>
+        <edit name="family" mode="prepend" binding="strong">
+            <string>[EMOJI_FONT_NAME]</string>
+        </edit>
+    </match>
 </fontconfig>
 ```
 

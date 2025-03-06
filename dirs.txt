@@ -3,3 +3,11 @@
 .config/fontconfig/ => fonts config
 .local/share/fonts/ => fonts store
 .local/share/aurorae/themes/ => themes store
+
+To control transperancy, use color schemes (.local/share/color-scheme), enter values as (r,g,b,a) where a is alpha (0 - 255)
+For widgets like wifi and app launcher, use plasma styles to configure their transparency
+Avoid custom accent colors
+Use better blur desktop effect
+
+Settings with alpha scheme is buggy, to apply color scheme to specific app, copy the systemsettigns from /usr/share/applications to its corrosponding in .local, this repo will help
+https://github.com/shalva97/kde-configuration-files and then append the color scheme to the end of the .desktop file
