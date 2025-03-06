@@ -11,3 +11,10 @@ Use better blur desktop effect
 
 Settings with alpha scheme is buggy, to apply color scheme to specific app, copy the systemsettigns from /usr/share/applications to its corrosponding in .local, this repo will help
 https://github.com/shalva97/kde-configuration-files and then append the color scheme to the end of the .desktop file
+
+
+alpha
+https://store.kde.org/p/1972214
+
+Better blur
+https://github.com/taj-ny/kwin-effects-forceblur
