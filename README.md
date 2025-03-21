@@ -15,245 +15,154 @@ Heavily inspired by PearOS, MacOS & CutefishOS
 ## Metadata
 
 ```
-UBUNTU_VERSION_ID="24.04"
-KDE_VERSION="6.3"
+KDE_VERSION=6.3.3
 ```
 
 ---
 
 ## Screenshots
 
-soon...
+![rice_1](screenshots/rice_1.png)
+![rice_2](screenshots/rice_2.png)
+![rice_3](screenshots/rice_3.png)
+![rice_4](screenshots/rice_4.png)
 
---
+---
 
 ## Steps
 
-### 1. Change The Fonts (and Emojis)
+**Note: Unless mentioned otherwise, run all the commands as a normal user (non-root), and keep the repo directory in `~` (aka `/home/$USER/`) directory for the ease of configuration**
 
-- You can download the fonts you like, I like Apple fonts tbh (sorry open-source community, I have failed you), I downloaded these fonts
-    - [SF Pro](https://devimages-cdn.apple.com/design/resources/download/SF-Pro.dmg) (sans-serif)
-    - [SF Pro Arabic](https://devimages-cdn.apple.com/design/resources/download/SF-Arabic.dmg) (sans-serif, for Arabic text support)
-    - [New York](https://devimages-cdn.apple.com/design/resources/download/NY.dmg) (serif)
-    - [Monaspice](https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Monaspace.zip) (monospace)
-    - +3 emoji fonts (to have the freedom of switching later)
-        - Apple Color Emoji (from [this Telegram channel](https://t.me/EmojiReplacer))
-        - Facebook MFFM Emoji (from [this Telegram channel](https://t.me/mffmemojis))
-        - WhatsApp MFFM Emoji (from [this Telegram channel](https://t.me/mffmemojis))
-- To download other Apple fonts have a look [here](https://developer.apple.com/fonts/)
-- Extract `.dmg` Apple fonts by opening the terminal on the fonts directory (usually `~/Downloads/`) and writing these commands (Note that this is for Apple .dmg files ONLY, if you downloaded a ttf/otf font you can skip this step)
+### 1. Preparation
+
+1. Clone this repo & enter the repo directory
 
 ```bash
-# extract .dmg file
-7z x <DMG_FILE>.dmg
-
-# navigate to the newly extracted directory
-cd <FONT_DIR>/
-
-# extract the .pkg file
-7z x <PKG_FILE>.pkg
-
-# extract the newly created `Payload~` file
-7z x Payload~
-
-# navigate to the newly created directory
-cd Library/
-
-# You will find your fonts right away
+cd ~
+git clone https://github.com/nerd-airfryer/kde-theme
+cd kde-theme/
 ```
 
-- Save the font family names in a place (we will need them later), you can run this command to a `.ttf` or `.otf` file
+### 2. Installing Fonts
+
+1. Move the fonts to their directory
 
 ```bash
-# Example
-fc-scan NewYork.ttf
-
-# output
-# family: "New York"(s) # THIS IS WHAT WE WANT => "New York"
-# familylang: "en"(s)
-# ...
+mv ~/kde-theme/dotfiles/assets/fonts/* ~/.local/share/fonts/
+# if you get an error that the directory does not exist, run this command: mkdir -p ~/.local/share/fonts/ && echo "Great, now, re-run this command (without quotes): 'mv ~/kde-theme/dotfiles/assets/fonts/* ~/.local/share/fonts/'"
 ```
 
-- move your desired font files (ttf/otf files) to install them
+2. Apply the fonts
+    1. Go to System Settings > Text & Fonts > Fonts
+    2. Click `Adjust All Fonts` in the top middle then choose `SF Pro`
+    3. Click on the pen icon next to `Fixed Width` font and change it to `Lilex Nerd Font`
+    4. Click Apply in the bottom right
+
+3. Add extra font-configurations
 
 ```bash
-# DO ((((ONLY ONE)))) OF THESE 2 COMMANDS
-# Personal Recommendation, if you are a beginner, do command 1
-
-# COMMAND 1: Install fonts for this user only
-mkdir -p ~/.local/share/fonts/
-mv <FONTFILE>.ttf ~/.local/share/fonts/ # otf fonts are acceptable also
-
-# COMMAND 2: Install fonts systemwide
-sudo mv <FONTFILE>.ttf /usr/share/fonts/ # otf fonts are acceptable also
+mv ~/kde-theme/dotfiles/configs/fonts/* ~/.config/fontconfig/conf.d/
+# if you get an error that the directory does not exist, run this command: mkdir -p ~/.config/fontconfig/conf.d/ && echo "Great, now, re-run this command (without quotes): 'mv ~/kde-theme/dotfiles/configs/fonts/* ~/.config/fontconfig/conf.d/'"
 ```
 
-- Remember to do this for all the fonts you want to apply / be able to use ✅
-- Emoji fonts are no different than any other font, they come in ttf/otf as well
-- Apply the fonts by going to `System Settings > Apperance & Style > Text & Fonts` and change the font to the desired font (usually a sans-serif font), this font will be the dominant font in most of the text (don't worry about the Arabic, monospace and Emoji fonts, theya're in the next steps)
-- Build the fonts cache by writing `fc-cache -f -v` in the terminal
-- To apply changes you do ONE of the following
-    - Open `KRunner` (alt + F2) and typing `plasmashell --replace`
-    - Reboot the device
-- Create a new font configurations directory
+### 3. Installing Better Blur Effect (Works best with transparent color schemes)
+
+1. If you are using Arch, install it using `yay`
 
 ```bash
-mkdir -p ~/.config/fontconfig/conf.d/ # current user
-
-# For system wide, no need because the directory is already there
+yay -S kwin-effects-forceblur
 ```
 
-- Change the default monospace emoji **(if not done from Graphical UI)** by creating a new configuration file
+Otherwise, install it by building it, chack the [official repo](https://github.com/taj-ny/kwin-effects-forceblur) for installation
+
+2. Go to System Settings > Window Management > Desktop Effects
+3. Make sure `Blur` and `Background Contrast` are unchecked, and then check `Better Blur` and configure it as you like
+
+### 4. Installing Color Schemes
+
+1. Add color schemes to their directory
 
 ```bash
-# go to the newly created directory (ONLY ONE COMMAND OF THE 2)
-
-# COMMAND 1
-cd ~/.config/fontconfig/conf.d/ # current user
-
-# COMMAND 2
-cd /usr/share/fontconfig/conf.avail/ # system wide
-
-# create a new file
-nano 70-default-monospace-font.conf # you can rename it with whatever, but it must start with 7 or 6 [not sure] and must end with .conf
+mv ~/kde-theme/dotfiles/assets/color-schemes/* ~/.local/share/color-schemes/
+# if you get an error that the directory does not exist, run this command: mkdir -p ~/.local/share/color-schemes/ && echo "Great, now, re-run this command (without quotes): 'mv ~/kde-theme/dotfiles/assets/color-schemes/* ~/.local/share/color-schemes/'"
 ```
 
-- paste this content in the `.conf` file
+2. Go to System Settings > Colors & Themes > Colors, and you will find the color schemes you have added, apply any of them (for example: `Sweet 50 Watermelon`)
 
-```xml
-<?xml version="1.0"?>
-<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-<fontconfig>
-    <alias>
-        <family>monospace</family>
-        <prefer>
-            <!-- Put font family name you get from `fc-scan` command -->
-            <family>[FONT_NAME_HERE]</family>
-        </prefer>
-   </alias>
-</fontconfig>
-```
+**Note: You will find the settings app got very annoying UI, don't worry, we will fix that (see [Extras](#9-extras))**
 
-- Create another `.conf` file to change default serif font if you downloaded a serif font
+**Another Note: You may encounter flickering, inconsistency of colors or any other UI annoying, restart the machine and everything should be fixed, or in the mean time, swich color scheme to breeze and change it lastly before the big restart of everything**
+
+### 5. Configure Application Style
+
+1. Go to System Settings > Colors & Themes > Application Style and click on the pen icon next to breeze
+2. Click on the `Transparency` tab
+3. Set the transparency to the lowest
+
+### 6. Configure Plasma Style
+
+1. Add plasma styles to their directory
 
 ```bash
-# same way as before (go to conf.d/ or conf.avail/ directory)
-
-nano 70-default-serif-font.conf
+mv -r ~/kde-theme/dotfiles/assets/plasma-styles/* ~/.local/share/plasma/desktoptheme/
+# if you get an error that the directory does not exist, run this command: mkdir -p ~/.local/share/plasma/desktoptheme/ && echo "Great, now, re-run this command (without quotes): 'mv -r ~/kde-theme/dotfiles/assets/plasma-styles/* ~/.local/share/plasma/desktoptheme/'"
 ```
 
-- paste this content
+2. Go to System Settings > Colors & Themes > Plasma Style
+3. Apply `Iridescent-round-watermelon`
 
-```xml
-<?xml version="1.0"?>
-<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-<fontconfig>
-    <alias>
-        <family>serif</family>
-        <prefer>
-            <!-- Font name you got from `fc-scan` command -->
-            <family>[FONT_NAME]</family>
-        </prefer>
-   </alias>
-</fontconfig>
-```
+**Note: You can customize the internals of the style (colors / minimum panel height / etc) by editing the svgs in Inkscape**
 
-- Create additional configuration file for default Arabic (or any specific locale) font
+### 7. Configure Window Decorations
+
+1. Add window decorations to their directory
 
 ```bash
-nano 70-default-arabic-font.conf
+mv -r ~/kde-theme/dotfiles/assets/window-decorations/* ~/.local/share/aurorae/themes/
+# if you get an error that the directory does not exist, run this command: mkdir -p ~/.local/share/aurorae/themes/ && echo "Great, now, re-run this command (without quotes): 'mv -r ~/kde-theme/dotfiles/assets/window-decorations/* ~/.local/share/aurorae/themes/'"
 ```
 
-- paste this content
+2. Go to System Settings > Colors & Themes > Window Decorations
+3. Apply the `Scratchy` decoration
 
-```xml
-<?xml version='1.0'?>
-<!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
-<fontconfig>
-    <match>
-        <test compare="contains" name="lang">
-            <!-- For arabic => ar, for Japanese => jp, etc... -->
-            <string>[LOCALE_ISO2_CODE]</string>
-        </test>
-        <edit mode="prepend" name="family">
-            <string>[FONT_FAMILY_NAME]</string>
-        </edit>
-    </match>
-</fontconfig>
-```
+**Note: You can customize the internals of the decoration by editing the svgs in Inkscape**
 
-- One last configuration file, default emojis
+### 8. Icons & Cursors 
+
+Icons & Cursors are normally Customized from the System Settings, Heavy Customizations for Icons & Cursors are by changing the images at `~./local/share/icons/` (icons) and `~/.icons` (cursors). I am using `Reversal-dark` icon pack + `Capitine Cursors` for cursors
+
+### 9. Desktop Panels
+
+Apply 3 Panels
+
+1. Panel 1 (bottom taskbar)
+    1. Configs (bottom, center, width: fit-content, height: 56, color: translucent, visibility: auto hide, floating: true)
+    2. Widgets (from left to right): "Applications-only Task Bar"
+2. Panel 2 (Desktop Switcher)
+    1. Configs (bottom, left, width: fit-content, height: 44, color: translucent, visibility: dodge-windows, floating: true)
+    2. Widgets (from left to right): "Margins Separator" - "Pager" - "Margins Separator"
+3. Panel 3 (Top Panel)
+    1. Configs (top, center, width: full, height: 22, color: translucent, visibility: always visible, floating: false)
+    2. Widgets (from left to right): "Application Menu" - "Global Menu" - "Spacer" - "System Tray" - "Margins Separator" - "Digital Clock" - "Margins Separator" - <u>"Application Title Bar"</u> - "Margins Separator" - "Minimize All Windows"
+
+**Note Regarding Application Title Bar**: To install it, run this command
 
 ```bash
-nano 70-default-emoji-font.conf
+mv -r ~/kde-theme/dotfiles/assets/plasmoids/* ~/.local/share/plasma/plasmoids/
+# if you get an error that the directory does not exist, run this command: mkdir -p ~/.local/share/plasma/plasmoids/ && echo "Great, now, re-run this command (without quotes): 'mv -r ~/kde-theme/dotfiles/assets/plasmoids/* ~/.local/share/plasma/plasmoids/'"
 ```
 
-- Paste this content
+### 10. Extras
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+#### 1. Exclude an application from applying a color scheme
 
-<fontconfig>
-    <match>
-        <test name="family">
-        <string>sans-serif</string></test>
-        <edit name="family" mode="prepend" binding="strong">
-            <string>[EMOJI_FONT_NAME]</string>
-        </edit>
-    </match>
-    <match>
-        <test name="family">
-            <string>serif</string>
-        </test>
-        <edit name="family" mode="prepend" binding="strong">
-            <string>[EMOJI_FONT_NAME]</string>
-        </edit>
-    </match>
-    <match>
-        <test name="family">
-            <string>monospace</string>
-        </test>
-        <edit name="family" mode="prepend" binding="strong">
-            <string>[EMOJI_FONT_NAME]</string>
-        </edit>
-    </match>
-    <match>
-        <test name="family">
-            <string>emoji</string>
-        </test>
-        <edit name="family" mode="prepend" binding="strong">
-            <string>[EMOJI_FONT_NAME]</string>
-        </edit>
-    </match>
-</fontconfig>
-```
+Motivation: While most of the KDE Applications have correct color theming, the Settings & Plasmashell Apps fallback background color
 
-- Rebuild the cache again in the terminal
+1. Get the application rc file position (thanks shalva97) [use this repo to locate its position](https://github.com/shalva97/kde-configuration-files), for the settings it's located in `~/.config/systemsettingsrc` and for plasmashell it's located in `~/.config/plasmashellrc`
+2. Open the files
+3. Open a **non-transparent** color scheme file (located in `~/.local/share/color-schemes/`), example `Sweet Watermelon` ✅ (NOT `Sweet 50 Watermelon` ❌)
+4. Copy the contents of the color scheme and append it to each of the rc files
 
-```bash
-fc-cache -f -v
-```
+### 11. Finally
 
-- Restart the shell in KRunner (or Reboot the device)
-
-```bash
-# in KRunner NOT the terminal
-plasmashell --replace
-```
-
-// later
-
-https://github.com/Pear-Project/pearOS-Default-Aurorae
-
-cp -r ./* ~/.local/share/aurorae/themes/
-
-https://github.com/Pear-Project/pearOS-Default-Icons
-
-
-For KVantum
-
-https://github.com/tsujan/Kvantum/blob/master/Kvantum/doc/Theme-Config
-
-Lines from 0 to 20
-
+Reboot your device
