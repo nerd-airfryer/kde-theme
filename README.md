@@ -109,7 +109,7 @@ mv ~/kde-theme/dotfiles/assets/color-schemes/* ~/.local/share/color-schemes/
 
 2. Go to System Settings > Colors & Themes > Colors, and you will find the color schemes you have added, apply any of them (for example: `Sweet 50 Watermelon`)
 
-**Note: You will find the settings app got very annoying UI, don't worry, we will fix that (see [Extras](#9-extras))**
+**Note: You will find the settings app got very annoying UI, don't worry, we will fix that (see [Extras](#11-extras))**
 
 **Another Note: You may encounter flickering, inconsistency of colors or any other UI annoying, restart the machine and everything should be fixed, or in the mean time, swich color scheme to breeze and change it lastly before the big restart of everything**
 
