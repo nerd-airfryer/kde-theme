@@ -133,7 +133,7 @@ Icons & Cursors are normally Customized from the System Settings, Heavy Customiz
 
 ### 9. Desktop Panels
 
-Apply 3 Panels
+Apply 3 Panels (Right Click on Desktop, then Choose "Enter Edit Mode")
 
 1. Panel 1 (bottom taskbar)
     1. Configs (bottom, center, width: fit-content, height: 56, color: translucent, visibility: auto hide, floating: true)
@@ -162,6 +162,49 @@ Motivation: While most of the KDE Applications have correct color theming, the S
 2. Open the files
 3. Open a **non-transparent** color scheme file (located in `~/.local/share/color-schemes/`), example `Sweet Watermelon` ✅ (NOT `Sweet 50 Watermelon` ❌)
 4. Copy the contents of the color scheme and append it to each of the rc files
+
+#### 2. Remove Time Separatoe `"|"` from Digital Clock Plasmoid (Top Panel)
+
+1. **Copy** the original system plasmoid to the user directory (you must use sudo)
+
+```bash
+sudo cp -r /usr/share/plasma/plasmoids/org.kde.plasma.digitalclock/ ~/.local/share/plasma/plasmoids/
+# if you get an error that the directory does not exist, run this command: mkdir -p ~/.local/share/plasma/plasmoids/ && echo "Great, now, re-run this command (without quotes): 'sudo cp -r /usr/share/plasma/plasmoids/org.kde.plasma.digitalclock/ ~/.local/share/plasma/plasmoids/'"
+```
+
+2. [Optional] change the plasmoid ownership (to prevent using sudo next times)
+
+```bash
+sudo chown $USER ~/.local/share/plasma/plasmoids/*
+```
+
+3. Open the UI code
+
+```bash
+# use nano, vim, kate, vs code, or any preferred text editor
+nano ~/.local/share/plasma/plasmoids/org.kde.plasma.digitalclock/contents/ui/DigitalClock.qml
+```
+
+4. Locate this code snippet and change here
+
+```ts
+Rectangle {
+    id: separator
+    property bool isOneLineMode: main.state == "oneLineDate"
+    
+    height: timeLabel.height * 0.8
+    width: timeLabel.height / 16
+    radius: width / 2
+    color: Kirigami.Theme.textColor
+
+    anchors.leftMargin: timeMetrics.advanceWidth(" ") + width / 2
+    anchors.verticalCenter: parent.verticalCenter
+    anchors.left: dateLabel.right
+
+    // visible: isOneLineMode && Plasmoid.configuration.showDate // COMMENT THIS LINE
+    visible: false // ADD THIS LINE
+}
+```
 
 ### 11. Finally
 
