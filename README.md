@@ -1,14 +1,28 @@
 # My KDE Theme
 
-Heavily inspired by PearOS, MacOS & CutefishOS
+Heavily inspired by [PearOS [DISCONTINUED]](https://pearos.xyz/), MacOS & [CutefishOS [DISCONTINUED]](https://cutefishos.com/)
 
 ---
 
-## Sections
+## Index
 
 - [MetaData](#metadata)
 - [Screenshots](#screenshots)
+- [Acknowledgements](#acknowledgements)
 - [Steps](#steps)
+    1. [Preparation](#1-preparation)
+    2. [Installing fonts](#2-installing-fonts)
+    3. [Installing Better Blur](#3-installing-better-blur-effect-works-best-with-transparent-color-schemes)
+    4. [Installing color schemes](#4-installing-color-schemes)
+    5. [Configuring application style](#5-configure-application-style)
+    6. [Configuring plasma style](#6-configure-plasma-style)
+    7. [Configuring window decorations](#7-configure-window-decorations)
+    8. [Icons & cursors](#8-icons--cursors)
+    9. [Wallpapers](#9-wallpapaers)
+    10. [Desktop panels](#10-desktop-panels)
+    11. [Extras](#11-extras)
+        1. [Fixes](#1-exclude-an-application-from-applying-a-color-scheme)
+        2. [More enhancements](#2-remove-time-separator--from-digital-clock-plasmoid-top-panel)
 
 ---
 
@@ -26,6 +40,12 @@ KDE_VERSION=6.3.3
 ![rice_2](screenshots/rice_2.png)
 ![rice_3](screenshots/rice_3.png)
 ![rice_4](screenshots/rice_4.png)
+
+---
+
+## Acknowledgements
+
+- Thanks for [Abdurrahman Tantawi](https://github.com/abrahman-ra) for the detailed [YouTube playlist](https://youtube.com/playlist?list=PLCLsSRg9rUdMJyKRdX6yoOlpn7R1e_dpZ) about customizing KDE (Note: Content in Arabic)
 
 ---
 
@@ -131,7 +151,20 @@ mv -r ~/kde-theme/dotfiles/assets/window-decorations/* ~/.local/share/aurorae/th
 
 Icons & Cursors are normally Customized from the System Settings, Heavy Customizations for Icons & Cursors are by changing the images at `~./local/share/icons/` (icons) and `~/.icons` (cursors). I am using `Reversal-dark` icon pack + `Capitine Cursors` for cursors
 
-### 9. Desktop Panels
+### 9. Wallpapers
+
+1. Add wallpapers to their directory
+
+```bash
+mv -r ~/kde-theme/dotfiles/assets/wallpapers/* ~/.local/share/wallpapers/
+# if you get an error that the directory does not exist, run this command: mkdir -p ~/.local/share/wallpapers/ && echo "Great, now, re-run this command (without quotes): 'mv -r ~/kde-theme/dotfiles/assets/wallpapers/* ~/.local/share/wallpapers/'"
+```
+
+Then, you should be able to access them by right click on your desktop and choosing `Desktop and Wallpaper`
+
+**To download free, HD wallpapers. I would highly recommend [pixabay](https://pixabay.com), since all the wallpapers are downloaded from it**
+
+### 10. Desktop Panels
 
 Apply 3 Panels (Right Click on Desktop, then Choose "Enter Edit Mode")
 
@@ -152,7 +185,7 @@ mv -r ~/kde-theme/dotfiles/assets/plasmoids/* ~/.local/share/plasma/plasmoids/
 # if you get an error that the directory does not exist, run this command: mkdir -p ~/.local/share/plasma/plasmoids/ && echo "Great, now, re-run this command (without quotes): 'mv -r ~/kde-theme/dotfiles/assets/plasmoids/* ~/.local/share/plasma/plasmoids/'"
 ```
 
-### 10. Extras
+### 11. Extras
 
 #### 1. Exclude an application from applying a color scheme
 
@@ -163,7 +196,7 @@ Motivation: While most of the KDE Applications have correct color theming, the S
 3. Open a **non-transparent** color scheme file (located in `~/.local/share/color-schemes/`), example `Sweet Watermelon` ✅ (NOT `Sweet 50 Watermelon` ❌)
 4. Copy the contents of the color scheme and append it to each of the rc files
 
-#### 2. Remove Time Separatoe `"|"` from Digital Clock Plasmoid (Top Panel)
+#### 2. Remove Time Separator `"|"` from Digital Clock Plasmoid (Top Panel)
 
 1. **Copy** the original system plasmoid to the user directory (you must use sudo)
 
@@ -206,6 +239,6 @@ Rectangle {
 }
 ```
 
-### 11. Finally
+### 12. Finally
 
 Reboot your device
