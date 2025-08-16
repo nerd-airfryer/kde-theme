@@ -1,0 +1,21 @@
+{
+  "name": "ayu-translucent",
+  "displayName": "Ayu Translucent",
+  "description": "A translucent and Blurry Theme Based on Ayu",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.103.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Ayu Translucent",
+        "uiTheme": "vs-dark",
+        "path": "./themes/Ayu Translucent-color-theme.json"
+      }
+    ]
+  }
+}
