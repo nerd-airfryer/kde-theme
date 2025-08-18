@@ -57,8 +57,8 @@
 		"button.secondaryBackground": "#565b6633",
 		"button.secondaryForeground": "#bfbdb6",
 		"button.secondaryHoverBackground": "#565b6680",
-		"dropdown.background": "#0b0e147f",
-		"dropdown.border": "#0b0e147f",
+		"dropdown.background": "#0b0e14",
+		"dropdown.border": "#0b0e14",
 
 		// input (search, global search, command palette, etc...)
 		"input.background": "#0d101700",
@@ -171,18 +171,18 @@
 		"diffEditor.diagonalFill": "#11151c",
 		
 		// editor widgets (fropdowns, search, etc...)
-		"editorWidget.background": "#0b0e149f",
+		"editorWidget.background": "#0b0e14",
 		"editorWidget.border": "#11151c00",
-		"editorHoverWidget.background": "#0b0e149f",
+		"editorHoverWidget.background": "#0b0e14",
 		"editorHoverWidget.border": "#11151c00",
-		"editorSuggestWidget.background": "#0f131a9f",
+		"editorSuggestWidget.background": "#0f131a",
 		"editorSuggestWidget.border": "#11151c",
 		"editorSuggestWidget.highlightForeground": "#e6b450",
-		"editorSuggestWidget.selectedBackground": "#4752667f",
+		"editorSuggestWidget.selectedBackground": "#475266",
 		"debugExceptionWidget.border": "#11151c00",
-		"debugExceptionWidget.background": "#0b0e147f",
-		"editorMarkerNavigation.background": "#0b0e147f",
-		"editorStickyScroll.background": "#0b0e149f",
+		"debugExceptionWidget.background": "#0b0e14",
+		"editorMarkerNavigation.background": "#0b0e14",
+		"editorStickyScroll.background": "#0b0e14",
 
 		// Peekview
 		"peekView.border": "#47526640",
